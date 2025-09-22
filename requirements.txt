@@ -1,5 +1,5 @@
-streamlit
-pandas
-ydata-profiling
+streamlit==1.49.1
+pandas==2.3.2
 pydantic
+ydata-profiling==4.16.1
 openpyxl
