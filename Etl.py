@@ -34,21 +34,24 @@ def valor_duplicado(df):
 linhas_duplicadas = valor_duplicado(df)
 print("Quantidade de linhas duplicadas:", linhas_duplicadas)
 
-# Função para pegar apenas colunas do tipo string
+# --- Função para pegar apenas colunas do tipo string ---
 def somente_strings(df):
     return df.select_dtypes(include='object')
 
-# Função para mostrar valores distintos de cada coluna string
+# Função para mostrar valores distintos de cada coluna string 
+
 def valores_distintos_string(df):
-    df_string = somente_strings(df)
+    df_string = df.select_dtypes(include='object')
     resultado = {}
     for col in df_string.columns:
-        resultado[col] = df_string[col].dropna().unique().tolist()
+        valores_unicos = df_string[col].dropna().unique()
+        resultado[col] = len(valores_unicos)
     return resultado
+
 valores_distintos = valores_distintos_string(df)
 print("Valores distintos das colunas string:")
-for coluna, valores in valores_distintos.items():
-    print(f"{coluna}: {valores}")
+for coluna, quantidade in valores_distintos.items():
+    print(f"{coluna}: {quantidade} valores distintos")
 
 #Função para cálculos númericos
 
@@ -87,9 +90,18 @@ print("Mediana:", mediano_valor)
 #Valor Moda encontrado
 
 def valor_moda(df_numerico):
-    return df_numerico.mode()[0]
-moda_valor = valor_moda(df_numerico)
-print("Valores Frequentes:", moda_valor)
+    modas = {}
+    for col in df_numerico.columns:
+        if not df_numerico[col].empty:
+            moda = df_numerico[col].mode()
+            if not moda.empty:
+                modas[col] = moda[0]  
+            else:
+                modas[col] = None
+        else:
+            modas[col] = None
+    return modas
+
 
 #Desvio Padrão encontrado
 
