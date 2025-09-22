@@ -34,6 +34,76 @@ def valor_duplicado(df):
 linhas_duplicadas = valor_duplicado(df)
 print("Quantidade de linhas duplicadas:", linhas_duplicadas)
 
+# Função para pegar apenas colunas do tipo string
+def somente_strings(df):
+    return df.select_dtypes(include='object')
+
+# Função para mostrar valores distintos de cada coluna string
+def valores_distintos_string(df):
+    df_string = somente_strings(df)
+    resultado = {}
+    for col in df_string.columns:
+        resultado[col] = df_string[col].dropna().unique().tolist()
+    return resultado
+valores_distintos = valores_distintos_string(df)
+print("Valores distintos das colunas string:")
+for coluna, valores in valores_distintos.items():
+    print(f"{coluna}: {valores}")
+
+#Função para cálculos númericos
+
+def somente_numericas(df):
+    return df.select_dtypes(include='number',)
+df_numerico = somente_numericas(df)
+
+#Menor Valor encontrado
+
+def menor_valor(df_numerico):
+    return df_numerico.min()
+menores_valores = menor_valor(df_numerico)
+print("Menores Valores:", menores_valores)
+
+#Maior Valor encontrado
+
+def maior_valor(df_numerico):
+    return df_numerico.max()
+maiores_valores = maior_valor(df_numerico)
+print("Maiores Valores:", maiores_valores)
+
+#Valor Médio encontrado
+
+def valor_medio(df_numerico):
+    return df_numerico.mean()
+media_valor = valor_medio(df_numerico)
+print("Média de Valores:", media_valor)
+
+#Valor Mediano encontrado
+
+def valor_mediana(df_numerico):
+    return df_numerico.median()
+mediano_valor = valor_mediana(df_numerico)
+print("Mediana:", mediano_valor)
+
+#Valor Moda encontrado
+
+def valor_moda(df_numerico):
+    return df_numerico.mode()[0]
+moda_valor = valor_moda(df_numerico)
+print("Valores Frequentes:", moda_valor)
+
+#Desvio Padrão encontrado
+
+def desvio_padrao(df_numerico):
+    return df_numerico.std()
+padrao_desvio = desvio_padrao(df_numerico)
+print("Desvio Padrão:", padrao_desvio)
+
+#Contagem de Valores Únicos
+
+def valor_unico(df_numerico):
+    return df_numerico.nunique()
+unic_valor = valor_unico(df)
+print("Valores Únicos:", unic_valor)
 
 
 

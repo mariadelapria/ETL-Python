@@ -3,3 +3,5 @@ pandas==2.3.2
 pydantic
 ydata-profiling==4.16.1
 openpyxl
+matplotlib
+seaborn
